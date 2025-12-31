@@ -21,11 +21,11 @@ public class LoginController {
 
 	
 	
-	// Display login page
-	@GetMapping("/")
-	public String showLoginPage() {
-		return "login"; // Login JSP
-	}
+//	// Display login page
+//	@GetMapping("/")
+//	public String showLoginPage() {
+//		return "login"; // Login JSP
+//	}
 
 	@GetMapping("/")
 	public String homeRedirect(HttpSession session) {
