@@ -20,7 +20,7 @@ import com.codegnan.cgecom.model.Product;
 import com.codegnan.cgecom.model.User;
 import com.codegnan.cgecom.service.iface.OrderService;
 import com.codegnan.cgecom.service.iface.ProductService;
-import com.codegnan.cgecom.service.impl.RazorpayService;
+
 
 import jakarta.servlet.http.HttpSession;
 
@@ -30,12 +30,12 @@ public class CartController {
 
 	private final ProductService productService;
 	private final OrderService orderService;
-	private final RazorpayService razorpayService;
 
-	public CartController(ProductService productService, OrderService orderService, RazorpayService razorpayService) {
+
+	public CartController(ProductService productService, OrderService orderService) {
 		this.productService = productService;
 		this.orderService = orderService;
-		this.razorpayService = razorpayService;
+		
 	}
 
 	@GetMapping
@@ -199,14 +199,8 @@ public class CartController {
 			order.setOrderItems(cartItems);
 
 			// Call RazorpayService to create an order
-			com.razorpay.Order razorpayOrder = razorpayService.createOrder(totalPrice, "INR", "OrderReceipt: "+order.getId());
-			response.put("id", razorpayOrder.get("id"));
-			response.put("amount", razorpayOrder.get("amount"));
-			response.put("currency", razorpayOrder.get("currency"));
-			System.out.println("******************In /razorpayOrder sent response");
-
-			System.out.println("******************In /razorpayOrder saving order");
-
+			
+			
 			// Save order and clear cart
 			order.setOrderStatus("COMPLETED");
 			orderService.saveOrder(order);
