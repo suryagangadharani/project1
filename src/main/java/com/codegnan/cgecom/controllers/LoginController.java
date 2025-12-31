@@ -19,15 +19,14 @@ public class LoginController {
 		this.userService = userService;
 	}
 
-	/*
+	
 	
 	// Display login page
 	@GetMapping("/")
 	public String showLoginPage() {
 		return "login"; // Login JSP
 	}
-	
-	*/
+
 	@GetMapping("/")
 	public String homeRedirect(HttpSession session) {
 	    User loggedInUser = (User) session.getAttribute("loggedInUser");
